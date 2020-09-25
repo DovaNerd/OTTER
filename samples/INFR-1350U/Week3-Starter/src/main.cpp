@@ -53,7 +53,12 @@ void GlDebugMessage(GLenum source, GLenum type, GLuint id, GLenum severity, GLsi
 
 GLFWwindow* window;
 
+void GlfwWindowResizedCallBack(GLFWwindow* window, int width, int height) {
+	glViewport(0, 0, width, height);
+}
+
 bool initGLFW() {
+	glfwSetWindowSizeCallback(window, GlfwWindowResizedCallBack);
 	if (glfwInit() == GLFW_FALSE) {
 		LOG_ERROR("Failed to initialize GLFW");
 		return false;
